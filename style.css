@@ -1891,8 +1891,8 @@ textarea.form-control {
 
 .footer-grid-3col {
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1.2fr;
-    gap: 3.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.5rem;
     align-items: flex-start;
     padding-bottom: 3rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -1904,6 +1904,7 @@ textarea.form-control {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.4rem;
+    justify-self: start;
 }
 
 .footer-logo-link {
@@ -1956,6 +1957,7 @@ textarea.form-control {
 /* Col 2 (Middle): Quick Links */
 .footer-col-middle {
     text-align: left;
+    justify-self: center;
 }
 
 .footer-col-title {
@@ -2021,28 +2023,33 @@ textarea.form-control {
     transform: translateX(3px);
 }
 
-/* Col 3 (Right): Pankaj Kumar profile */
+/* Col 3 (Right): Pankaj Kumar profile aligned to right */
 .footer-col-right {
-    text-align: left;
+    text-align: right;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 0.5rem;
+    justify-self: end;
+    max-width: 360px;
 }
 
 .footer-profile-name {
-    font-size: 1.55rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: var(--text-cream);
     letter-spacing: 0.5px;
     margin: 0;
+    text-align: right;
 }
 
 .footer-profile-role {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--accent-gold);
     margin: 0;
     line-height: 1.4;
+    text-align: right;
 }
 
 .footer-profile-desc {
@@ -2050,6 +2057,7 @@ textarea.form-control {
     color: var(--text-muted);
     line-height: 1.6;
     margin-top: 0.4rem;
+    text-align: right;
 }
 
 /* Footer Copyright */
@@ -2278,8 +2286,22 @@ textarea.form-control {
         gap: 2.5rem;
     }
 
+    .footer-col-middle {
+        justify-self: start;
+    }
+
     .footer-col-right {
         grid-column: span 2;
+        justify-self: start;
+        text-align: left;
+        align-items: flex-start;
+        max-width: 100%;
+    }
+
+    .footer-profile-name,
+    .footer-profile-role,
+    .footer-profile-desc {
+        text-align: left;
     }
 }
 
@@ -2436,6 +2458,14 @@ textarea.form-control {
     .footer-col-right {
         text-align: left;
         align-items: flex-start;
+        justify-self: start;
+        max-width: 100%;
+    }
+
+    .footer-profile-name,
+    .footer-profile-role,
+    .footer-profile-desc {
+        text-align: left;
     }
 
     .footer-logo-img {
