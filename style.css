@@ -1902,35 +1902,43 @@ textarea.form-control {
 .footer-col-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1.4rem;
+    align-items: center;
+    text-align: center;
+    gap: 1.1rem;
     justify-self: start;
 }
 
 .footer-logo-link {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
 }
 
 .footer-logo-link:hover {
-    transform: scale(1.06);
-    filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.45));
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
 }
 
 .footer-logo-img {
-    height: 82px !important;
-    max-height: 82px !important;
+    height: 145px !important;
+    max-height: 145px !important;
     width: auto !important;
-    max-width: 200px !important;
+    max-width: 160px !important;
     object-fit: contain;
     display: block;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .footer-socials {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.9rem;
     margin-top: 0.2rem;
+    width: 100%;
 }
 
 .footer-socials a {
@@ -2453,7 +2461,13 @@ textarea.form-control {
         grid-column: span 1;
     }
 
-    .footer-col-left,
+    .footer-col-left {
+        align-items: center;
+        text-align: center;
+        justify-self: start;
+        max-width: 100%;
+    }
+
     .footer-col-middle,
     .footer-col-right {
         text-align: left;
@@ -2469,8 +2483,8 @@ textarea.form-control {
     }
 
     .footer-logo-img {
-        height: 72px !important;
-        max-height: 72px !important;
+        height: 125px !important;
+        max-height: 125px !important;
     }
 
     .footer-quick-links {
@@ -2546,7 +2560,8 @@ textarea.form-control {
     }
 
     .footer-logo-img {
-        height: 60px;
+        height: 115px !important;
+        max-height: 115px !important;
     }
 }
 
