@@ -669,11 +669,14 @@ img {
     background-color: var(--bg-navy-light);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    padding: 2.2rem;
+    padding: 1.6rem 1.8rem;
     box-shadow: var(--shadow-premium);
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
+    height: 440px;
+    display: flex;
+    flex-direction: column;
 }
 
 .timeline-card:hover {
@@ -686,7 +689,7 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
@@ -716,43 +719,45 @@ img {
 }
 
 .role-title {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-cream);
-    margin-bottom: 0.2rem;
+    margin-bottom: 1rem;
 }
 
 .employment-type {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 1.5rem;
+    display: none;
 }
 
 /* Curtain Open effect on hover */
 .card-details-curtain {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 1.5rem;
+    padding-top: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .curtain-heading {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--accent-gold);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.45rem;
 }
 
 .experience-bullets {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .experience-bullets li {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     color: var(--text-muted);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
     position: relative;
-    padding-left: 1.2rem;
-    text-align: justify;
+    padding-left: 1.15rem;
+    line-height: 1.45;
+    text-align: left;
 }
 
 .experience-bullets li::before {
@@ -2408,6 +2413,11 @@ textarea.form-control {
     .timeline-dot {
         left: 12px !important;
         right: auto !important;
+    }
+
+    .timeline-card {
+        height: auto;
+        padding: 1.4rem 1.5rem;
     }
     
     /* Projects layout */
