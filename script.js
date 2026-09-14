@@ -315,6 +315,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Equalize Timeline Cards Height so both cards have the exact same height and never crop
+    const equalizeTimelineCards = () => {
+        const cards = document.querySelectorAll('.timeline-card');
+        if (!cards.length) return;
+        if (window.innerWidth > 768) {
+            cards.forEach(card => card.style.minHeight = 'auto');
+            let maxHeight = 0;
+            cards.forEach(card => {
+                const h = card.scrollHeight || card.offsetHeight;
+                if (h > maxHeight) maxHeight = h;
+            });
+            if (maxHeight > 0) {
+                cards.forEach(card => {
+                    card.style.minHeight = maxHeight + 'px';
+                });
+            }
+        } else {
+            cards.forEach(card => {
+                card.style.minHeight = 'auto';
+            });
+        }
+    };
+
+    equalizeTimelineCards();
+    window.addEventListener('resize', equalizeTimelineCards);
+    window.addEventListener('load', equalizeTimelineCards);
+
     // Re-initialize Lucide Icons for newly rendered elements
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
         window.lucide.createIcons();
