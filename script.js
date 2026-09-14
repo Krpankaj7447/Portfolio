@@ -430,39 +430,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // 3. Dynamic Responsive Height Equalizer (Ensures NO content overflow and NO cropped footers)
+        // 3. Stable Height Manager (Fixed symmetric dimensions without runaway growth)
         const equalizeBookHeight = () => {
             const bookEl = bookWrapper.querySelector('.interactive-book');
             const pagesWrapper = bookWrapper.querySelector('.book-pages-wrapper');
             if (!bookEl || !pagesWrapper) return;
 
-            if (window.innerWidth <= 850) {
-                let maxH = 0;
-                pages.forEach(page => {
-                    const inner = page.querySelector('.page-inner');
-                    if (inner) {
-                        let totalChildrenH = 0;
-                        Array.from(inner.children).forEach(child => {
-                            const cs = window.getComputedStyle(child);
-                            const mt = parseFloat(cs.marginTop) || 0;
-                            const mb = parseFloat(cs.marginBottom) || 0;
-                            totalChildrenH += child.offsetHeight + mt + mb;
-                        });
-                        const padTop = parseFloat(window.getComputedStyle(inner).paddingTop) || 0;
-                        const padBottom = parseFloat(window.getComputedStyle(inner).paddingBottom) || 0;
-                        const fullPageH = Math.max(inner.scrollHeight, totalChildrenH + padTop + padBottom);
-                        if (fullPageH > maxH) maxH = fullPageH;
-                    }
-                });
-
-                const minBase = window.innerWidth <= 480 ? 500 : 540;
-                const finalH = Math.max(maxH + 20, minBase);
-
-                bookEl.style.minHeight = finalH + 'px';
-                pagesWrapper.style.minHeight = finalH + 'px';
+            if (window.innerWidth <= 768) {
+                bookEl.style.minHeight = '460px';
+                bookEl.style.height = '460px';
+                pagesWrapper.style.minHeight = '460px';
+                pagesWrapper.style.height = '460px';
             } else {
                 bookEl.style.minHeight = '450px';
+                bookEl.style.height = '450px';
                 pagesWrapper.style.minHeight = '450px';
+                pagesWrapper.style.height = '450px';
             }
         };
 
@@ -497,8 +480,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.lucide.createIcons();
             }
 
-            equalizeBookHeight();
-
             // Case A: Front Cover Physical Opening (Page 0 -> Next)
             if (currentPage === 0 && targetIndex > 0) {
                 playPaperSound(true);
@@ -510,7 +491,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetEl.classList.remove('revealing-under');
                     currentPage = targetIndex;
                     updateTabs(currentPage);
-                    equalizeBookHeight();
                     isFlipping = false;
                 }, 800);
                 return;
@@ -527,7 +507,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetEl.classList.remove('revealing-under');
                     currentPage = targetIndex;
                     updateTabs(currentPage);
-                    equalizeBookHeight();
                     isFlipping = false;
                 }, 700);
                 return;
@@ -544,7 +523,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetEl.classList.remove('turning-backward');
                     currentPage = targetIndex;
                     updateTabs(currentPage);
-                    equalizeBookHeight();
                     isFlipping = false;
                 }, 700);
                 return;
