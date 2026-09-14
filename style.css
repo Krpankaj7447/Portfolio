@@ -1888,6 +1888,31 @@ textarea.form-control {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.footer-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.footer-logo-link {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+}
+
+.footer-logo-link:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.45));
+}
+
+.footer-logo-img {
+    height: 75px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
 .footer-logo {
     font-size: 2.2rem;
     font-weight: 900;
@@ -2351,6 +2376,10 @@ textarea.form-control {
     .btn-live-project {
         font-size: 0.84rem;
         padding: 0.7rem 1rem;
+    }
+
+    .footer-logo-img {
+        height: 60px;
     }
 }
 
