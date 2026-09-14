@@ -430,7 +430,47 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // 3. Update Bookmark Navigation Tabs
+        // 3. Dynamic Responsive Height Equalizer (Ensures NO content overflow and NO cropped footers)
+        const equalizeBookHeight = () => {
+            const bookEl = bookWrapper.querySelector('.interactive-book');
+            const pagesWrapper = bookWrapper.querySelector('.book-pages-wrapper');
+            if (!bookEl || !pagesWrapper) return;
+
+            if (window.innerWidth <= 850) {
+                let maxH = 0;
+                pages.forEach(page => {
+                    const inner = page.querySelector('.page-inner');
+                    if (inner) {
+                        let totalChildrenH = 0;
+                        Array.from(inner.children).forEach(child => {
+                            const cs = window.getComputedStyle(child);
+                            const mt = parseFloat(cs.marginTop) || 0;
+                            const mb = parseFloat(cs.marginBottom) || 0;
+                            totalChildrenH += child.offsetHeight + mt + mb;
+                        });
+                        const padTop = parseFloat(window.getComputedStyle(inner).paddingTop) || 0;
+                        const padBottom = parseFloat(window.getComputedStyle(inner).paddingBottom) || 0;
+                        const fullPageH = Math.max(inner.scrollHeight, totalChildrenH + padTop + padBottom);
+                        if (fullPageH > maxH) maxH = fullPageH;
+                    }
+                });
+
+                const minBase = window.innerWidth <= 480 ? 500 : 540;
+                const finalH = Math.max(maxH + 20, minBase);
+
+                bookEl.style.minHeight = finalH + 'px';
+                pagesWrapper.style.minHeight = finalH + 'px';
+            } else {
+                bookEl.style.minHeight = '600px';
+                pagesWrapper.style.minHeight = '600px';
+            }
+        };
+
+        equalizeBookHeight();
+        window.addEventListener('resize', equalizeBookHeight);
+        window.addEventListener('load', equalizeBookHeight);
+
+        // 4. Update Bookmark Navigation Tabs
         const updateTabs = (targetIndex) => {
             tabButtons.forEach(btn => {
                 const tabIndex = parseInt(btn.getAttribute('data-tab-page'), 10);
@@ -442,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        // 4. Physical 3D Page Turn Engine
+        // 5. Physical 3D Page Turn Engine
         const flipToPage = (targetIndex) => {
             if (isFlipping) return;
             if (targetIndex < 0 || targetIndex >= totalPages) return;
@@ -457,6 +497,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.lucide.createIcons();
             }
 
+            equalizeBookHeight();
+
             // Case A: Front Cover Physical Opening (Page 0 -> Next)
             if (currentPage === 0 && targetIndex > 0) {
                 playPaperSound(true);
@@ -468,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetEl.classList.remove('revealing-under');
                     currentPage = targetIndex;
                     updateTabs(currentPage);
+                    equalizeBookHeight();
                     isFlipping = false;
                 }, 800);
                 return;
@@ -484,6 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetEl.classList.remove('revealing-under');
                     currentPage = targetIndex;
                     updateTabs(currentPage);
+                    equalizeBookHeight();
                     isFlipping = false;
                 }, 700);
                 return;
@@ -500,6 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetEl.classList.remove('turning-backward');
                     currentPage = targetIndex;
                     updateTabs(currentPage);
+                    equalizeBookHeight();
                     isFlipping = false;
                 }, 700);
                 return;

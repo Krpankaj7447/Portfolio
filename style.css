@@ -3146,29 +3146,56 @@ textarea.form-control {
     
     /* Interactive Book Responsive Layout (<= 768px) */
     .interactive-book-wrapper {
-        padding: 0 10px;
+        padding: 0 12px;
         perspective: none;
+        overflow-x: hidden;
     }
     
     .interactive-book {
         min-height: 560px;
         border-radius: 16px;
+        width: 100%;
+        max-width: 100%;
+        transition: min-height 0.3s ease;
+    }
+
+    .book-pages-wrapper {
+        min-height: 560px;
+        transition: min-height 0.3s ease;
     }
     
     .book-side-tabs {
-        right: -36px;
-        gap: 4px;
-        top: 20px;
-    }
-    
-    .book-tab-btn {
-        padding: 5px 8px;
-        font-size: 0.65rem;
+        display: none; /* Avoid horizontal tab clipping and screen overflow */
     }
     
     .page-inner {
-        padding: 1.8rem 1.6rem 1.8rem 1.2rem;
-        min-height: 560px;
+        padding: 1.6rem 1.4rem 1.4rem 1.2rem;
+        margin: 6px 8px 6px 4px;
+        border-radius: 10px;
+        min-height: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .chapter-bullet-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .book-page-footer {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0.5rem !important;
+        padding-top: 0.75rem !important;
+        margin-top: auto !important;
+        width: 100% !important;
+        flex-shrink: 0 !important;
     }
     
     /* Experience Timeline layout */
@@ -3377,14 +3404,19 @@ textarea.form-control {
 
     /* Interactive Book Mobile (< 480px) */
     .interactive-book-wrapper {
-        padding: 0;
-        margin-top: 1.5rem;
+        padding: 0 4px;
+        margin-top: 1.2rem;
+        overflow-x: hidden;
     }
 
     .interactive-book {
-        border-radius: 12px;
-        min-height: 520px;
+        border-radius: 14px;
+        min-height: 540px;
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        transition: min-height 0.3s ease;
     }
 
     .book-spiral-spine {
@@ -3397,97 +3429,248 @@ textarea.form-control {
 
     .book-pages-wrapper {
         padding-left: 0;
-        border-radius: 12px;
-        min-height: 520px;
+        border-radius: 14px;
+        min-height: 540px;
+        overflow: hidden;
+        width: 100%;
+        transition: min-height 0.3s ease;
     }
 
     .book-page {
         padding-left: 0;
         transform-origin: 0 center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .page-back-face {
         left: 4px;
         right: 4px;
+        top: 4px;
+        bottom: 4px;
     }
 
     .book-page::before {
         left: 4px;
         right: 4px;
+        top: 4px;
+        bottom: 4px;
     }
 
     .cover-media-container {
-        min-height: 520px;
+        min-height: 500px;
+        height: 100%;
+        border-radius: 14px;
+    }
+
+    .book-cover-bg {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
     }
 
     .cover-profile-circle-wrapper {
-        width: 60px;
-        height: 60px;
-        top: 22.5%;
-        left: 48%;
+        width: 62px;
+        height: 62px;
+        top: 23%;
+        left: 48.5%;
     }
 
     .book-cover-open-btn {
-        bottom: 22px;
-        right: 18px;
-        padding: 0.65rem 1.2rem;
-        font-size: 0.85rem;
+        bottom: 20px;
+        right: 20px;
+        padding: 0.65rem 1.25rem;
+        font-size: 0.84rem;
+        border-radius: 25px;
+        z-index: 25;
     }
 
     .page-inner {
-        padding: 1.4rem 1rem;
-        margin: 4px;
-        min-height: 520px;
-        border-radius: 8px;
+        padding: 1.1rem 0.85rem 0.9rem;
+        margin: 0;
+        min-height: auto;
+        height: 100%;
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid rgba(212, 175, 55, 0.22);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .page-header-author, .page-header-chapter {
+        margin-bottom: 0.5rem;
+    }
+
+    .page-top-tag, .chapter-badge {
+        font-size: 0.68rem;
+        padding: 2px 8px;
+        margin-bottom: 0.2rem;
+        letter-spacing: 1px;
     }
 
     .author-name, .chapter-main-title {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
+        margin: 0.1rem 0;
+        letter-spacing: 0.5px;
     }
 
-    .author-quote {
-        font-size: 0.86rem;
-        padding: 0.5rem 0.8rem;
+    .author-role-sub, .index-subtitle {
+        font-size: 0.8rem;
     }
 
-    .author-intro-para {
-        font-size: 0.86rem;
-        line-height: 1.55;
+    .gold-ornament-line {
+        margin: 0.5rem auto 0.65rem;
+    }
+
+    .author-quote, .chapter-statement-quote {
+        font-size: 0.81rem;
+        line-height: 1.42;
+        padding: 0.5rem 0.75rem;
+        margin: 0 0 0.65rem;
+    }
+
+    .author-intro-para, .chapter-intro-text {
+        font-size: 0.82rem;
+        line-height: 1.45;
+        margin-bottom: 0.65rem;
     }
 
     .author-currently-box {
-        padding: 0.65rem 0.8rem;
+        padding: 0.55rem 0.75rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .currently-title {
+        font-size: 0.66rem;
+        margin-bottom: 0.35rem;
     }
 
     .author-currently-box .currently-grid {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
+        gap: 0.35rem;
+        text-align: left;
     }
 
-    .chapter-bullet-item {
-        font-size: 0.84rem;
-        line-height: 1.5;
-        gap: 0.5rem;
+    .curr-col p {
+        font-size: 0.8rem;
     }
 
-    .book-page-footer {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: space-between;
-    }
-
-    .book-page-num {
+    .curr-col .curr-sub {
         font-size: 0.72rem;
     }
 
+    .author-sign-wrapper {
+        margin-bottom: 0.3rem;
+        padding-right: 0.5rem;
+    }
+
+    .author-signature {
+        font-size: 1.5rem;
+    }
+
+    .book-index-list {
+        gap: 0.35rem;
+    }
+
+    .index-item {
+        padding: 0.45rem 0.75rem;
+        border-radius: 6px;
+    }
+
+    .index-num {
+        font-size: 0.76rem;
+        padding: 1px 6px;
+        margin-right: 0.5rem;
+    }
+
+    .index-title {
+        font-size: 0.84rem;
+    }
+
+    .chapter-bullet-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .chapter-bullet-item {
+        font-size: 0.81rem;
+        line-height: 1.42;
+        gap: 0.45rem;
+    }
+
+    .golden-bullet {
+        font-size: 0.92rem;
+        line-height: 1.2;
+    }
+
+    /* Guaranteed Visible Footer inside page border */
+    .book-page-footer {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0.25rem !important;
+        padding-top: 0.65rem !important;
+        margin-top: auto !important;
+        border-top: 1px solid rgba(212, 175, 55, 0.25) !important;
+        width: 100% !important;
+        flex-shrink: 0 !important;
+        z-index: 20 !important;
+    }
+
+    .book-page-num {
+        font-size: 0.72rem !important;
+        white-space: nowrap !important;
+        order: 0 !important;
+        width: auto !important;
+        text-align: center !important;
+        margin-bottom: 0 !important;
+    }
+
     .book-nav-btn {
-        padding: 0.35rem 0.75rem;
-        font-size: 0.75rem;
+        padding: 0.38rem 0.72rem !important;
+        font-size: 0.74rem !important;
+        gap: 0.25rem !important;
+        border-radius: 16px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+
+    .book-nav-btn span {
+        font-size: 0.74rem !important;
+    }
+
+    .book-nav-btn i, .book-nav-btn svg {
+        width: 14px !important;
+        height: 14px !important;
     }
 
     .book-index-quick-btn {
-        padding: 0.35rem 0.7rem;
-        font-size: 0.75rem;
+        padding: 0.38rem 0.65rem !important;
+        font-size: 0.72rem !important;
+        gap: 0.2rem !important;
+        border-radius: 14px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+    }
+
+    .book-index-quick-btn span {
+        font-size: 0.72rem !important;
+    }
+
+    .book-index-quick-btn i, .book-index-quick-btn svg {
+        width: 13px !important;
+        height: 13px !important;
     }
 }
 
