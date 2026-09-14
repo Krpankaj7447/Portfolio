@@ -490,7 +490,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1.5rem auto 0;
+    margin: 0 auto;
     max-width: 720px;
     width: 100%;
     position: relative;
@@ -932,11 +932,11 @@ img {
 /* Profile Photo directly above 'About' on the front cover */
 .cover-profile-circle-wrapper {
     position: absolute;
-    top: 22%;
+    top: 17%;
     left: 48.5%;
     transform: translate(-50%, -50%);
-    width: 66px;
-    height: 66px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     padding: 3px;
     background: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #7A5E12 100%);
@@ -3219,6 +3219,13 @@ textarea.form-control {
         height: 460px;
         border-radius: 14px;
     }
+
+    .cover-profile-circle-wrapper {
+        width: 58px;
+        height: 58px;
+        top: 17%;
+        left: 48.5%;
+    }
     
     .page-inner {
         padding: 0.95rem 1rem 0.75rem 0.85rem;
@@ -3537,9 +3544,9 @@ textarea.form-control {
     }
 
     .cover-profile-circle-wrapper {
-        width: 60px;
-        height: 60px;
-        top: 22%;
+        width: 54px;
+        height: 54px;
+        top: 17%;
         left: 48.5%;
     }
 
