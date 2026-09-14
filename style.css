@@ -1019,6 +1019,242 @@ img {
     transform: translateY(-2px);
 }
 
+/* --------------------------------------------------
+   FEATURED PROJECT VIDEO & ACTIONS
+-------------------------------------------------- */
+.project-video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #050b14;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    margin: 1.2rem 0 1.5rem 0;
+    cursor: pointer;
+}
+
+.project-preview-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Guarantees 0% crop on all sides */
+    display: block;
+    background-color: #040812;
+    transition: transform 0.3s ease;
+}
+
+.video-overlay-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: rgba(6, 15, 30, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    color: var(--text-cream);
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.video-overlay-hint.is-playing {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.hint-play-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-gold);
+    background: rgba(10, 25, 47, 0.9);
+    border: 2px solid var(--accent-gold);
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.project-video-wrapper:hover .hint-play-icon {
+    transform: scale(1.12);
+}
+
+.hint-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: rgba(10, 25, 47, 0.85);
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.project-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.btn-details-modal {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    font-family: var(--font-inter);
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-details-modal:hover {
+    background: var(--accent-gold);
+    color: var(--bg-dark);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn-live-project {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background-color: var(--bg-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-cream);
+    font-family: var(--font-inter);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-live-project:hover {
+    border-color: #4BB543;
+    color: #4BB543;
+    background-color: rgba(75, 181, 67, 0.08);
+    box-shadow: 0 4px 18px rgba(75, 181, 67, 0.22);
+    transform: translateY(-2px);
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* --------------------------------------------------
+   PROJECT DETAIL POPUP MODAL
+-------------------------------------------------- */
+.project-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 10, 20, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 1.5rem;
+}
+
+.project-modal-backdrop.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-modal-content {
+    background: var(--bg-navy-light);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.15);
+    max-width: 680px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2.5rem;
+    position: relative;
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-modal-backdrop.is-active .project-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--bg-dark);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-snap);
+}
+
+.modal-close-btn:hover {
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-cream);
+    margin-bottom: 0.3rem;
+    padding-right: 2rem;
+}
+
+.modal-org {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.modal-section h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.5px;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+}
+
 
 /* --------------------------------------------------
    PAGE 6 — SKILLS
@@ -2034,6 +2270,21 @@ textarea.form-control {
     .contact-info-panel {
         padding: 2.0rem;
     }
+
+    /* Modal Mobile Responsiveness */
+    .project-modal-backdrop {
+        padding: 1rem;
+    }
+    
+    .project-modal-content {
+        padding: 1.8rem;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+
+    .modal-title {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2078,6 +2329,28 @@ textarea.form-control {
     
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-modal-content {
+        padding: 1.4rem;
+        border-radius: 14px;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-close-btn {
+        top: 0.8rem;
+        right: 0.8rem;
+        width: 32px;
+        height: 32px;
+    }
+
+    .btn-details-modal,
+    .btn-live-project {
+        font-size: 0.84rem;
+        padding: 0.7rem 1rem;
     }
 }
 

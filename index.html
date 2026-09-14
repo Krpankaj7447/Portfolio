@@ -255,9 +255,8 @@
             <h2 class="section-title text-center">Featured Projects</h2>
             <div class="projects-grid">
                 
-                <!-- Project 1 -->
-                <!-- Project 1 -->
-                <div class="project-card reveal-slide-left">
+                <!-- Project 1: InfraVision -->
+                <div class="project-card reveal-slide-left" data-project="infravision">
                     <div class="project-header">
                         <div class="project-meta">
                             <span class="project-type">Full-Stack Web Application</span>
@@ -266,36 +265,34 @@
                         <h3 class="project-title">InfraVision</h3>
                         <p class="project-org">Organization: ITLC India Pvt. Ltd.</p>
                     </div>
-                    <div class="project-content">
-                        <p class="project-description">
-                            Engineered and launched a live production-deployed full-stack platform featuring robust administrative control panels and modular CRUD functionality. Implemented secure authentication, role-specific interfaces, database optimization and hardened API endpoints to improve application reliability and security.
-                        </p>
-                        
-                        <div class="project-outcomes">
-                            <h4>Key Outcomes:</h4>
-                            <ul class="outcome-list">
-                                <li>Production-deployed full-stack platform</li>
-                                <li>Modular CRUD functionality</li>
-                                <li>Secure token-based sessions</li>
-                                <li>Role-based interfaces (Super Admin, Admin, Guest)</li>
-                                <li>Strict input validation & rate limiting</li>
-                                <li>Centralized error logging</li>
-                                <li>Optimized relational database structure</li>
-                            </ul>
+
+                    <!-- Video Container: 100% No Crop & Clean Aspect Ratio -->
+                    <div class="project-video-wrapper">
+                        <video class="project-preview-video" 
+                               src="infravision/20260801-1751-30.7322157.mp4" 
+                               muted loop playsinline preload="metadata">
+                        </video>
+                        <div class="video-overlay-hint">
+                            <i data-lucide="play" class="hint-play-icon"></i>
+                            <span class="hint-text">Hover or tap to play video</span>
                         </div>
-                        
-                        <div class="project-tech">
-                            <span class="tech-pill">React.js</span>
-                            <span class="tech-pill">PHP</span>
-                            <span class="tech-pill">MySQL</span>
-                            <span class="tech-pill">JWT Auth</span>
-                            <span class="tech-pill">Tailwind CSS</span>
-                        </div>
+                    </div>
+
+                    <!-- Project Actions -->
+                    <div class="project-actions">
+                        <button type="button" class="btn btn-details-modal" data-modal="modal-infravision">
+                            <i data-lucide="info" class="btn-icon"></i>
+                            See Details About My Project
+                        </button>
+                        <a href="https://infra-vision.itlcindia.com" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
+                            <i data-lucide="external-link" class="btn-icon"></i>
+                            Visit Live Project
+                        </a>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card reveal-slide-left" style="animation-delay: 0.2s;">
+                <!-- Project 2: Bhartiya Kisan Kranti Union Portal -->
+                <div class="project-card reveal-slide-left" style="animation-delay: 0.2s;" data-project="kisan-union">
                     <div class="project-header">
                         <div class="project-meta">
                             <span class="project-type">Full-Stack Web Portal</span>
@@ -304,35 +301,150 @@
                         <h3 class="project-title">Bhartiya Kisan Kranti Union Portal</h3>
                         <p class="project-org">Organization: ITLC India Pvt. Ltd.</p>
                     </div>
-                    <div class="project-content">
-                        <p class="project-description">
-                            Developed and deployed a live production portal with a custom Content Management System for dynamically managing organizational communications and website content.
-                        </p>
-                        
-                        <div class="project-outcomes">
-                            <h4>Key Outcomes:</h4>
-                            <ul class="outcome-list">
-                                <li>Live production deployment</li>
-                                <li>Custom Content Management System (CMS)</li>
-                                <li>REST API development</li>
-                                <li>MySQL database integration</li>
-                                <li>Dynamic content management</li>
-                                <li>Schema-based validation</li>
-                                <li>Environment credential management</li>
-                                <li>Security hardening against OWASP Top 10</li>
-                            </ul>
+
+                    <!-- Video Container: 100% No Crop & Clean Aspect Ratio -->
+                    <div class="project-video-wrapper">
+                        <video class="project-preview-video" 
+                               src="vid/kisan-kranti-portal.mp4" 
+                               muted loop playsinline preload="metadata">
+                        </video>
+                        <div class="video-overlay-hint">
+                            <i data-lucide="play" class="hint-play-icon"></i>
+                            <span class="hint-text">Hover or tap to play video</span>
                         </div>
-                        
-                        <div class="project-tech">
-                            <span class="tech-pill">React.js</span>
-                            <span class="tech-pill">PHP</span>
-                            <span class="tech-pill">MySQL</span>
-                            <span class="tech-pill">REST APIs</span>
-                            <span class="tech-pill">Tailwind CSS</span>
-                        </div>
+                    </div>
+
+                    <!-- Project Actions -->
+                    <div class="project-actions">
+                        <button type="button" class="btn btn-details-modal" data-modal="modal-kisan-union">
+                            <i data-lucide="info" class="btn-icon"></i>
+                            See Details About My Project
+                        </button>
+                        <a href="https://itlcfoundation.com" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
+                            <i data-lucide="external-link" class="btn-icon"></i>
+                            Visit Live Project
+                        </a>
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Modal 1: InfraVision Project Details -->
+            <div id="modal-infravision" class="project-modal-backdrop" aria-hidden="true" role="dialog">
+                <div class="project-modal-content">
+                    <button type="button" class="modal-close-btn" aria-label="Close modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                    
+                    <div class="modal-header">
+                        <div class="project-meta">
+                            <span class="project-type">Full-Stack Web Application</span>
+                            <span class="project-status live">LIVE PRODUCTION</span>
+                        </div>
+                        <h3 class="modal-title">InfraVision</h3>
+                        <p class="modal-org">Organization: ITLC India Pvt. Ltd.</p>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="modal-section">
+                            <h4>Project Overview</h4>
+                            <p class="project-description">
+                                Engineered and launched a live production-deployed full-stack platform featuring robust administrative control panels and modular CRUD functionality. Implemented secure authentication, role-specific interfaces, database optimization and hardened API endpoints to improve application reliability and security.
+                            </p>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4>Key Outcomes & Security Architecture</h4>
+                            <ul class="outcome-list">
+                                <li>Production-deployed full-stack enterprise platform</li>
+                                <li>Modular CRUD functionality for automated data operations</li>
+                                <li>Secure token-based sessions with JWT authentication</li>
+                                <li>Role-based access control (Super Admin, Admin, Guest)</li>
+                                <li>Strict input sanitization, validation & rate limiting</li>
+                                <li>Centralized error logging & audit trails</li>
+                                <li>Optimized relational database schema & indexing</li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4>Technologies & Tools Used</h4>
+                            <div class="project-tech">
+                                <span class="tech-pill">React.js</span>
+                                <span class="tech-pill">PHP</span>
+                                <span class="tech-pill">MySQL</span>
+                                <span class="tech-pill">JWT Auth</span>
+                                <span class="tech-pill">Tailwind CSS</span>
+                                <span class="tech-pill">REST APIs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="https://infra-vision.itlcindia.com" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
+                            <i data-lucide="external-link" class="btn-icon"></i>
+                            Visit Live Project (infra-vision.itlcindia.com)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal 2: Bhartiya Kisan Kranti Union Portal Details -->
+            <div id="modal-kisan-union" class="project-modal-backdrop" aria-hidden="true" role="dialog">
+                <div class="project-modal-content">
+                    <button type="button" class="modal-close-btn" aria-label="Close modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                    
+                    <div class="modal-header">
+                        <div class="project-meta">
+                            <span class="project-type">Full-Stack Web Portal</span>
+                            <span class="project-status live">LIVE PRODUCTION</span>
+                        </div>
+                        <h3 class="modal-title">Bhartiya Kisan Kranti Union Portal</h3>
+                        <p class="modal-org">Organization: ITLC India Pvt. Ltd.</p>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="modal-section">
+                            <h4>Project Overview</h4>
+                            <p class="project-description">
+                                Developed and deployed a live production portal with a custom Content Management System for dynamically managing organizational communications and website content.
+                            </p>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4>Key Outcomes & Security Architecture</h4>
+                            <ul class="outcome-list">
+                                <li>Live production deployment with 99.9% uptime</li>
+                                <li>Custom Content Management System (CMS) with role controls</li>
+                                <li>High-performance REST API development</li>
+                                <li>Relational MySQL database integration & optimization</li>
+                                <li>Dynamic content management with instant preview</li>
+                                <li>Schema-based input validation and XSS prevention</li>
+                                <li>Environment credential management & zero secrets in client code</li>
+                                <li>Security hardening aligned with OWASP Top 10 guidelines</li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4>Technologies & Tools Used</h4>
+                            <div class="project-tech">
+                                <span class="tech-pill">React.js</span>
+                                <span class="tech-pill">PHP</span>
+                                <span class="tech-pill">MySQL</span>
+                                <span class="tech-pill">REST APIs</span>
+                                <span class="tech-pill">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="https://itlcfoundation.com" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
+                            <i data-lucide="external-link" class="btn-icon"></i>
+                            Visit Live Project (itlcfoundation.com)
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -219,4 +219,105 @@ document.addEventListener('DOMContentLoaded', () => {
             formFeedback.className = 'form-feedback';
         }, 5000);
     });
+
+    /* --------------------------------------------------
+       FEATURED PROJECT VIDEO HOVER & MODAL CONTROLLER
+    -------------------------------------------------- */
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        const video = card.querySelector('.project-preview-video');
+        const hint = card.querySelector('.video-overlay-hint');
+        if (!video) return;
+
+        const playVideo = () => {
+            video.muted = true;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        if (hint) hint.classList.add('is-playing');
+                    })
+                    .catch(() => {});
+            }
+        };
+
+        const pauseVideo = () => {
+            video.pause();
+            if (hint) hint.classList.remove('is-playing');
+        };
+
+        // Hover events for Desktop
+        card.addEventListener('mouseenter', playVideo);
+        card.addEventListener('mouseleave', pauseVideo);
+
+        // Tap/Click event for Mobile/Touch
+        const videoWrapper = card.querySelector('.project-video-wrapper');
+        if (videoWrapper) {
+            videoWrapper.addEventListener('click', () => {
+                if (video.paused) {
+                    playVideo();
+                } else {
+                    pauseVideo();
+                }
+            });
+        }
+    });
+
+    // Project Detail Modal Controller
+    const modalOpenButtons = document.querySelectorAll('.btn-details-modal');
+    const modalCloseButtons = document.querySelectorAll('.modal-close-btn');
+    const modalBackdrops = document.querySelectorAll('.project-modal-backdrop');
+
+    modalOpenButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetModalId = btn.getAttribute('data-modal');
+            const targetModal = document.getElementById(targetModalId);
+            if (targetModal) {
+                targetModal.classList.add('is-active');
+                targetModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+
+                // Pause any running videos when modal is opened
+                document.querySelectorAll('.project-preview-video').forEach(v => v.pause());
+                document.querySelectorAll('.video-overlay-hint').forEach(h => h.classList.remove('is-playing'));
+            }
+        });
+    });
+
+    const closeModal = (modal) => {
+        if (!modal) return;
+        modal.classList.remove('is-active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    modalCloseButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modal = btn.closest('.project-modal-backdrop');
+            if (modal) closeModal(modal);
+        });
+    });
+
+    modalBackdrops.forEach(backdrop => {
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) {
+                closeModal(backdrop);
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.project-modal-backdrop.is-active');
+            if (activeModal) closeModal(activeModal);
+        }
+    });
+
+    // Re-initialize Lucide Icons for newly rendered elements
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+    }
 });
+
