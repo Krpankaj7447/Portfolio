@@ -1927,9 +1927,9 @@ textarea.form-control {
     max-width: 160px !important;
     object-fit: contain;
     display: block;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(212, 175, 55, 0.25);
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
 }
 
 .footer-socials {
@@ -2031,12 +2031,12 @@ textarea.form-control {
     transform: translateX(3px);
 }
 
-/* Col 3 (Right): Pankaj Kumar profile aligned to right */
+/* Col 3 (Right): Pankaj Kumar profile centered internally, positioned on right */
 .footer-col-right {
-    text-align: right;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     gap: 0.5rem;
     justify-self: end;
     max-width: 360px;
@@ -2048,7 +2048,7 @@ textarea.form-control {
     color: var(--text-cream);
     letter-spacing: 0.5px;
     margin: 0;
-    text-align: right;
+    text-align: center;
 }
 
 .footer-profile-role {
@@ -2057,15 +2057,15 @@ textarea.form-control {
     color: var(--accent-gold);
     margin: 0;
     line-height: 1.4;
-    text-align: right;
+    text-align: center;
 }
 
 .footer-profile-desc {
     font-size: 0.88rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.65;
     margin-top: 0.4rem;
-    text-align: right;
+    text-align: center;
 }
 
 /* Footer Copyright */
@@ -2300,16 +2300,16 @@ textarea.form-control {
 
     .footer-col-right {
         grid-column: span 2;
-        justify-self: start;
-        text-align: left;
-        align-items: flex-start;
-        max-width: 100%;
+        justify-self: center;
+        text-align: center;
+        align-items: center;
+        max-width: 480px;
     }
 
     .footer-profile-name,
     .footer-profile-role,
     .footer-profile-desc {
-        text-align: left;
+        text-align: center;
     }
 }
 
@@ -2468,18 +2468,24 @@ textarea.form-control {
         max-width: 100%;
     }
 
-    .footer-col-middle,
-    .footer-col-right {
+    .footer-col-middle {
         text-align: left;
         align-items: flex-start;
         justify-self: start;
         max-width: 100%;
     }
 
+    .footer-col-right {
+        text-align: center;
+        align-items: center;
+        justify-self: center;
+        max-width: 100%;
+    }
+
     .footer-profile-name,
     .footer-profile-role,
     .footer-profile-desc {
-        text-align: left;
+        text-align: center;
     }
 
     .footer-logo-img {
