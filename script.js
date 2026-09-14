@@ -461,8 +461,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 bookEl.style.minHeight = finalH + 'px';
                 pagesWrapper.style.minHeight = finalH + 'px';
             } else {
-                bookEl.style.minHeight = '600px';
-                pagesWrapper.style.minHeight = '600px';
+                bookEl.style.minHeight = '480px';
+                pagesWrapper.style.minHeight = '480px';
             }
         };
 
