@@ -342,6 +342,175 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', equalizeTimelineCards);
     window.addEventListener('load', equalizeTimelineCards);
 
+    /* --------------------------------------------------
+       INTERACTIVE 3D DIGITAL BOOK CONTROLLER
+    -------------------------------------------------- */
+    const initInteractiveBook = () => {
+        const bookWrapper = document.querySelector('.interactive-book-wrapper');
+        if (!bookWrapper) return;
+
+        const pages = bookWrapper.querySelectorAll('.book-page');
+        const tabButtons = bookWrapper.querySelectorAll('.book-tab-btn');
+        const totalPages = pages.length; // 10 pages: 0 to 9
+        let currentPage = 0;
+
+        const goToPage = (targetIndex) => {
+            if (targetIndex < 0 || targetIndex >= totalPages) return;
+            if (targetIndex === currentPage) return;
+
+            pages.forEach((page) => {
+                const pageIndex = parseInt(page.getAttribute('data-page'), 10);
+                page.classList.remove('is-active', 'slide-prev');
+                
+                if (pageIndex === targetIndex) {
+                    page.classList.add('is-active');
+                } else if (pageIndex < targetIndex) {
+                    page.classList.add('slide-prev');
+                }
+            });
+
+            // Update Bookmark Tabs
+            tabButtons.forEach(btn => {
+                const tabIndex = parseInt(btn.getAttribute('data-tab-page'), 10);
+                if (tabIndex === targetIndex) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            currentPage = targetIndex;
+
+            // Re-render lucide icons if needed
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                window.lucide.createIcons();
+            }
+
+            // If user scrolled away on small screens, keep book neatly in view
+            if (window.innerWidth < 768) {
+                const bookRect = bookWrapper.getBoundingClientRect();
+                if (bookRect.top < 0 || bookRect.bottom > window.innerHeight) {
+                    bookWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        };
+
+        // Next Page Buttons
+        const nextBtns = bookWrapper.querySelectorAll('.btn-book-next');
+        nextBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToPage(currentPage + 1);
+            });
+        });
+
+        // Prev Page Buttons
+        const prevBtns = bookWrapper.querySelectorAll('.btn-book-prev');
+        prevBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 0) {
+                    goToPage(currentPage - 1);
+                }
+            });
+        });
+
+        // Cover Reset Button on the last page
+        const firstBtns = bookWrapper.querySelectorAll('.btn-book-first');
+        firstBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToPage(0);
+            });
+        });
+
+        // Quick Index Button (Back to Table of Contents - page 2)
+        const indexQuickBtns = bookWrapper.querySelectorAll('.book-index-quick-btn');
+        indexQuickBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToPage(2);
+            });
+        });
+
+        // Table of Contents Items (click any chapter)
+        const indexItems = bookWrapper.querySelectorAll('.index-item');
+        indexItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetPage = parseInt(item.getAttribute('data-goto'), 10);
+                if (!isNaN(targetPage)) {
+                    goToPage(targetPage);
+                }
+            });
+        });
+
+        // Bookmark Tab Buttons (on the right)
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetPage = parseInt(btn.getAttribute('data-tab-page'), 10);
+                if (!isNaN(targetPage)) {
+                    goToPage(targetPage);
+                }
+            });
+        });
+
+        // Keyboard navigation when mouse is inside book
+        let isBookHovered = false;
+        bookWrapper.addEventListener('mouseenter', () => { isBookHovered = true; });
+        bookWrapper.addEventListener('mouseleave', () => { isBookHovered = false; });
+
+        document.addEventListener('keydown', (e) => {
+            if (!isBookHovered) return;
+            if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+                if (currentPage < totalPages - 1) {
+                    e.preventDefault();
+                    goToPage(currentPage + 1);
+                }
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                if (currentPage > 0) {
+                    e.preventDefault();
+                    goToPage(currentPage - 1);
+                }
+            }
+        });
+
+        // Touch Swipe Navigation for Mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        bookWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        bookWrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        const handleSwipe = () => {
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+
+            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX < 0) {
+                    if (currentPage < totalPages - 1) {
+                        goToPage(currentPage + 1);
+                    }
+                } else {
+                    if (currentPage > 0) {
+                        goToPage(currentPage - 1);
+                    }
+                }
+            }
+        };
+    };
+
+    initInteractiveBook();
+
     // Re-initialize Lucide Icons for newly rendered elements
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
         window.lucide.createIcons();

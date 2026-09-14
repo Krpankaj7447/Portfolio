@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=2.8">
+    <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body>
 
@@ -91,60 +91,497 @@
     <section id="about" class="about-section scroll-spy">
         <div class="container">
             <h2 class="section-title text-center">About Me</h2>
-            <div class="about-grid">
-                <div class="about-image-wrapper reveal-slide-left">
-                    <div class="image-inner bloom-shadow">
-                        <img src="photo/WhatsApp%20Image%202026-08-03%20at%209.18.34%20PM.jpeg" alt="Pankaj Kumar About Photo" class="profile-photo">
-                    </div>
-                </div>
-                <div class="about-text-content">
-                    <p class="about-text">
-                        I am a Full Stack Developer with a strong foundation in modern web development, backend security, database management, and responsive user-interface development. I have hands-on experience working with React.js, PHP, MySQL, Tailwind CSS, REST APIs, JWT authentication, and role-based access control. My professional experience includes building production-grade applications at ITLC India Pvt. Ltd. and working on data engineering and visualization at HCLTech. I am currently pursuing a B.Tech in Computer Science Engineering with an AI-ML specialization from A.P.J. Abdul Kalam Technical University, Lucknow. My work combines frontend development, secure backend architecture, database optimization, API development, and clean coding practices. I focus on creating reliable, maintainable, and user-centric software solutions.
-                    </p>
+            <!-- Interactive 3D Digital Book Container -->
+            <div class="interactive-book-wrapper">
+                <div class="interactive-book" id="interactive-book" data-current-page="0">
                     
-                    <div class="mv-cards">
-                        <!-- Mission Card (3D Flip) -->
-                        <div class="flip-card mission-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-icon-container">
-                                        <i data-lucide="target"></i>
-                                    </div>
-                                    <h3>Our Mission</h3>
-                                    <p class="tap-hint">Hover / Tap to flip</p>
-                                </div>
-                                <div class="flip-card-back">
-                                    <h3>My Mission</h3>
-                                    <p>Build secure, scalable and user-centric software solutions while continuously improving full-stack development, backend security, database optimization and engineering practices.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Vision Card (3D Flip) -->
-                        <div class="flip-card vision-card">
-                            <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <div class="card-icon-container">
-                                        <i data-lucide="eye"></i>
-                                    </div>
-                                    <h3>Our Vision</h3>
-                                    <p class="tap-hint">Hover / Tap to flip</p>
-                                </div>
-                                <div class="flip-card-back">
-                                    <h3>My Vision</h3>
-                                    <p>To become a highly skilled software engineer capable of designing reliable, scalable and impactful technology solutions for real-world problems.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Left Spiral Spine (10 Metallic Golden Rings) -->
+                    <div class="book-spiral-spine" aria-hidden="true">
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
+                        <div class="spiral-ring"><span class="ring-hole hole-left"></span><span class="ring-metal"></span><span class="ring-hole hole-right"></span></div>
                     </div>
 
-                    <!-- Staggered Navigation Buttons -->
-                    <div class="about-nav-buttons reveal-stagger">
-                        <a href="#experience" class="btn btn-sm btn-outline nav-btn">Work Experience</a>
-                        <a href="#education" class="btn btn-sm btn-outline nav-btn">Education</a>
-                        <a href="#projects" class="btn btn-sm btn-outline nav-btn">Projects</a>
-                        <a href="#skills" class="btn btn-sm btn-outline nav-btn">Skills</a>
-                        <a href="#certifications" class="btn btn-sm btn-outline nav-btn">Certifications</a>
+                    <!-- Right Bookmark Navigation Tabs -->
+                    <div class="book-side-tabs" aria-label="Book Quick Navigation Tabs">
+                        <button type="button" class="book-tab-btn active" data-tab-page="0" title="Cover"><span>Cover</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="1" title="Author"><span>Author</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="2" title="Index"><span>Index</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="3" title="01 Who"><span>01</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="4" title="02 Exp"><span>02</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="5" title="03 Edu"><span>03</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="6" title="04 Cert"><span>04</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="7" title="05 Hobbies"><span>05</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="8" title="06 Mission"><span>06</span></button>
+                        <button type="button" class="book-tab-btn" data-tab-page="9" title="07 Vision"><span>07</span></button>
+                    </div>
+
+                    <!-- Book Pages Wrapper -->
+                    <div class="book-pages-wrapper">
+
+                        <!-- Page 0: Front Cover (Closed State with User Photo above 'About') -->
+                        <div class="book-page book-page-cover is-active" data-page="0">
+                            <div class="cover-media-container">
+                                <img src="book/book-cover.jpg" alt="About Pankaj Book Cover" class="book-cover-bg">
+                                
+                                <!-- Profile Photo placed directly above 'About' in the center -->
+                                <div class="cover-profile-circle-wrapper" title="Pankaj Kumar">
+                                    <img src="photo/WhatsApp%20Image%202026-08-03%20at%209.18.34%20PM.jpeg" alt="Pankaj Kumar Profile" class="cover-profile-circle">
+                                </div>
+
+                                <!-- Cover Open Button at Bottom Right with gold pulse -->
+                                <button type="button" class="book-cover-open-btn btn-book-next" aria-label="Open Book">
+                                    <span>Open Book</span>
+                                    <i data-lucide="arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Page 1: About the Author (Structured layout from Reference Image) -->
+                        <div class="book-page book-page-content" data-page="1">
+                            <div class="page-inner">
+                                <div class="page-header-author">
+                                    <span class="page-top-tag">ABOUT THE AUTHOR</span>
+                                    <h3 class="author-name">PANKAJ KUMAR</h3>
+                                    <p class="author-role-sub">Full Stack Developer • AI Enthusiast</p>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <blockquote class="author-quote">
+                                    “I build technology with curiosity, purpose, and a constant desire to learn.”
+                                </blockquote>
+
+                                <p class="author-intro-para">
+                                    I am a Full Stack Developer with a strong foundation in modern web development, scalable backend systems, databases, and AI/ML. Passionate about engineering clean, secure, and production-ready applications.
+                                </p>
+
+                                <div class="author-currently-box">
+                                    <h5 class="currently-title">CURRENTLY</h5>
+                                    <div class="currently-grid">
+                                        <div class="curr-col">
+                                            <p><span class="curr-bullet">✦</span> <strong>B.Tech CSE (AI / ML)</strong></p>
+                                            <p class="curr-sub">AKTU Lucknow (2022–2026)</p>
+                                        </div>
+                                        <div class="curr-col">
+                                            <p><span class="curr-bullet">✦</span> <strong>Full-Stack & Data Dev</strong></p>
+                                            <p class="curr-sub">Production Web Applications</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="author-sign-wrapper">
+                                    <span class="author-signature">Pankaj</span>
+                                    <div class="signature-line"></div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <span class="book-page-num">01 / ABOUT</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 2: Final Book Index (Table of Contents) -->
+                        <div class="book-page book-page-content" data-page="2">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">📖 Final Book Index</span>
+                                    <h3 class="chapter-main-title">Table of Contents</h3>
+                                    <p class="index-subtitle">Click any chapter to jump directly to that page</p>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <ul class="book-index-list">
+                                    <li class="index-item" data-goto="3">
+                                        <span class="index-num">01</span>
+                                        <span class="index-title">Who is Pankaj?</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                    <li class="index-item" data-goto="4">
+                                        <span class="index-num">02</span>
+                                        <span class="index-title">Experience</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                    <li class="index-item" data-goto="5">
+                                        <span class="index-num">03</span>
+                                        <span class="index-title">Education</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                    <li class="index-item" data-goto="6">
+                                        <span class="index-num">04</span>
+                                        <span class="index-title">Certifications</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                    <li class="index-item" data-goto="7">
+                                        <span class="index-num">05</span>
+                                        <span class="index-title">Hobbies & Interests</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                    <li class="index-item" data-goto="8">
+                                        <span class="index-num">06</span>
+                                        <span class="index-title">My Mission</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                    <li class="index-item" data-goto="9">
+                                        <span class="index-num">07</span>
+                                        <span class="index-title">My Vision</span>
+                                        <i data-lucide="arrow-right" class="index-arrow"></i>
+                                    </li>
+                                </ul>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <span class="book-page-num">02 / INDEX</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 3: Chapter 01 — Who is Pankaj? -->
+                        <div class="book-page book-page-content" data-page="3">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 01</span>
+                                    <h3 class="chapter-main-title">01 — Who is Pankaj?</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <p class="chapter-intro-text">
+                                    A full-stack software engineer driven by curiosity, architectural elegance, and building robust systems that solve meaningful problems.
+                                </p>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Full-Stack Engineer with AI-ML Specialization:</strong> Pursuing B.Tech in CSE (AI/ML) at AKTU while actively authoring production-ready applications with modern frameworks.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Systematic Problem Solver:</strong> Dedicated to understanding complex systems down to query execution plans, authentication handshakes, and responsive state lifecycles.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Security-First Architecture:</strong> Experienced in JWT cryptographic token validation, Role-Based Access Control (RBAC), and sanitization shielding against OWASP Top 10 vulnerabilities.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Relentless Continuous Learner:</strong> Constantly sharpening algorithmic foundations, evaluating modern web standards, and experimenting with agentic developer tooling.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">03 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 4: Chapter 02 — Experience -->
+                        <div class="book-page book-page-content" data-page="4">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 02</span>
+                                    <h3 class="chapter-main-title">02 — Experience</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <p class="chapter-intro-text">
+                                    Hands-on professional milestones across production web engineering and corporate enterprise data systems.
+                                </p>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Full-Stack Web Developer at ITLC India Pvt. Ltd. (Apr 2026 – Present):</strong> Architected and maintained production-grade web applications using React.js, PHP, MySQL, and Tailwind CSS with JWT & RBAC security.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Database Latency Optimization:</strong> Streamlined relational database schemas and indexing structures, achieving a verified 20% reduction in overall data query latency.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Data Engineering & Visualization at HCLTech (Apr 2025 – Aug 2025):</strong> Engineered automated data cleansing and transformation pipelines using MS Excel and interactive Power BI operational dashboards.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Operational Decision Support:</strong> Improved executive report turnaround speed and data integrity by 30% through automated analytics.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">04 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 5: Chapter 03 — Education -->
+                        <div class="book-page book-page-content" data-page="5">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 03</span>
+                                    <h3 class="chapter-main-title">03 — Education</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <p class="chapter-intro-text">
+                                    Academic background combining core computer science principles with modern artificial intelligence.
+                                </p>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>B.Tech in Computer Science & Engineering (AI-ML):</strong> Pursuing degree at A.P.J. Abdul Kalam Technical University (AKTU), Lucknow (2022 – 2026) with cumulative CGPA of 7.0.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Core Computer Science Pillars:</strong> Data Structures & Algorithms, Object-Oriented Analysis & Design, Operating Systems, Database Management Systems, and Computer Networks.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Artificial Intelligence & ML Foundation:</strong> Supervised & unsupervised learning models, neural networks, exploratory data analytics, and predictive modeling.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Practical Project Applications:</strong> Bridged theoretical algorithms directly into functioning web prototypes and real-world database implementations.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">05 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 6: Chapter 04 — Certifications -->
+                        <div class="book-page book-page-content" data-page="6">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 04</span>
+                                    <h3 class="chapter-main-title">04 — Certifications</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <p class="chapter-intro-text">
+                                    Verified credentials and recognized technical proficiencies validating full-stack and analytics mastery.
+                                </p>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Python Full Stack Development Certification:</strong> Rigorous validation covering Python core, OOPs, database integrations, REST APIs, and end-to-end full stack architecture.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Data Analytics & Business Intelligence:</strong> Comprehensive credential encompassing data cleansing, advanced spreadsheet modeling, data transformation pipelines, and Power BI dashboards.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Live Production Deliverables:</strong> Architected and deployed <em>InfraVision</em> (AI Infrastructure monitoring) and <em>Bhartiya Kisan Kranti Union Portal</em>.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Secure Coding Standards:</strong> Practical expertise implementing JWT security, RBAC hierarchies, and defensive API rate limiting.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">06 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 7: Chapter 05 — Hobbies & Interests -->
+                        <div class="book-page book-page-content" data-page="7">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 05</span>
+                                    <h3 class="chapter-main-title">05 — Hobbies & Interests</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <p class="chapter-intro-text">
+                                    Curiosity-driven pursuits beyond code that stimulate creativity, focus, and technical depth.
+                                </p>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Exploring Autonomous AI Agents:</strong> Experimenting with prompt design, LLM developer tools, and agentic pair-programming workflows to accelerate development.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Deconstructing Production Architectures:</strong> Studying open-source codebases and tech engineering blogs to discover scalable design patterns.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>UI/UX Prototyping & Visual Design:</strong> Crafting bespoke digital aesthetics, micro-interactions, and 3D card physics using pure CSS and modern web canvases.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Analytical Games & Strategy:</strong> Playing strategic board and puzzle games that require deep forward-planning, pattern matching, and rapid tactical pivots.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">07 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 8: Chapter 06 — My Mission -->
+                        <div class="book-page book-page-content" data-page="8">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 06</span>
+                                    <h3 class="chapter-main-title">06 — My Mission</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <blockquote class="chapter-statement-quote">
+                                    “Build secure, scalable and user-centric software solutions while continuously advancing full-stack architecture, backend security, database optimization and engineering craftsmanship.”
+                                </blockquote>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Engineered for Reliability:</strong> Author production-grade software that remains fault-tolerant, resilient, and performant under high transaction loads.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Proactive Cyber Defense:</strong> Integrate rigorous security principles from day zero—guaranteeing data integrity, least privilege authorization, and defensive input validation.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Human-Centric Impact:</strong> Bridge complex computational capabilities into intuitive, accessible user interfaces that solve real-world problems for real communities.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Engineering Discipline:</strong> Advocate clean code architecture, comprehensive documentation, and collaborative code reviews within modern agile teams.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">08 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-next" aria-label="Next page">
+                                        <span>Next</span> <i data-lucide="chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Page 9: Chapter 07 — My Vision -->
+                        <div class="book-page book-page-content" data-page="9">
+                            <div class="page-inner">
+                                <div class="page-header-chapter">
+                                    <span class="chapter-badge">Chapter 07</span>
+                                    <h3 class="chapter-main-title">07 — My Vision</h3>
+                                    <div class="gold-ornament-line"></div>
+                                </div>
+
+                                <blockquote class="chapter-statement-quote">
+                                    “To evolve into a visionary Principal Software Architect, designing resilient web ecosystems and AI-powered platforms that drive meaningful societal and enterprise transformation.”
+                                </blockquote>
+
+                                <div class="chapter-bullet-list">
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>High-Performance Distributed Systems:</strong> Lead the design of fault-tolerant cloud systems, microservices architectures, and real-time event-driven pipelines.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Pioneering AI Integration:</strong> Blend generative AI models and intelligent autonomous workflows directly into full-stack consumer applications.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Empowering Technical Leadership:</strong> Cultivate and mentor engineering talent, championing open communication, technical excellence, and a culture of relentless innovation.</p>
+                                    </div>
+                                    <div class="chapter-bullet-item">
+                                        <span class="golden-bullet">✦</span>
+                                        <p><strong>Societal Scale Impact:</strong> Build enduring digital infrastructure that empowers critical sectors like agriculture, digital governance, and technical education.</p>
+                                    </div>
+                                </div>
+
+                                <div class="book-page-footer">
+                                    <button type="button" class="book-nav-btn btn-book-prev" aria-label="Previous page">
+                                        <i data-lucide="chevron-left"></i> <span>Prev</span>
+                                    </button>
+                                    <button type="button" class="book-index-quick-btn" aria-label="Back to Table of Contents">
+                                        <i data-lucide="book-open"></i> <span>Index</span>
+                                    </button>
+                                    <span class="book-page-num">09 / 09</span>
+                                    <button type="button" class="book-nav-btn btn-book-first" aria-label="Back to Cover">
+                                        <span>Cover</span> <i data-lucide="rotate-ccw"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -953,6 +1390,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3.0"></script>
 </body>
 </html>
