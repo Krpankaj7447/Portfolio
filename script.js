@@ -345,6 +345,9 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --------------------------------------------------
        INTERACTIVE 3D DIGITAL BOOK CONTROLLER
     -------------------------------------------------- */
+    /* --------------------------------------------------
+       REALISTIC 3D PHYSICAL DIGITAL BOOK CONTROLLER
+    -------------------------------------------------- */
     const initInteractiveBook = () => {
         const bookWrapper = document.querySelector('.interactive-book-wrapper');
         if (!bookWrapper) return;
@@ -353,23 +356,82 @@ document.addEventListener('DOMContentLoaded', () => {
         const tabButtons = bookWrapper.querySelectorAll('.book-tab-btn');
         const totalPages = pages.length; // 10 pages: 0 to 9
         let currentPage = 0;
+        let isFlipping = false;
 
-        const goToPage = (targetIndex) => {
-            if (targetIndex < 0 || targetIndex >= totalPages) return;
-            if (targetIndex === currentPage) return;
+        // 1. Inject Authentic Paper Back Face to all pages for 3D realism
+        pages.forEach((page, index) => {
+            if (!page.querySelector('.page-back-face')) {
+                const backFace = document.createElement('div');
+                backFace.className = index === 0 ? 'page-back-face cover-back-face' : 'page-back-face';
+                backFace.innerHTML = `
+                    <div class="back-face-inner">
+                        <span class="crest-monogram">PK</span>
+                        <div class="crest-gold-line"></div>
+                    </div>
+                `;
+                page.appendChild(backFace);
+            }
+        });
 
-            pages.forEach((page) => {
-                const pageIndex = parseInt(page.getAttribute('data-page'), 10);
-                page.classList.remove('is-active', 'slide-prev');
-                
-                if (pageIndex === targetIndex) {
-                    page.classList.add('is-active');
-                } else if (pageIndex < targetIndex) {
-                    page.classList.add('slide-prev');
+        // 2. Synthesized Paper Flip Audio (Native Web Audio API - Zero External Lag)
+        const playPaperSound = (isCover = false) => {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                if (!window._bookAudioCtx) {
+                    window._bookAudioCtx = new AudioCtx();
                 }
-            });
+                const ctx = window._bookAudioCtx;
+                if (ctx.state === 'suspended') {
+                    ctx.resume();
+                }
 
-            // Update Bookmark Tabs
+                const duration = isCover ? 0.38 : 0.24;
+                const bufferSize = Math.floor(ctx.sampleRate * duration);
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = buffer.getChannelData(0);
+
+                let lastVal = 0.0;
+                for (let i = 0; i < bufferSize; i++) {
+                    const white = Math.random() * 2 - 1;
+                    // Pink noise filter simulating paper friction
+                    lastVal = (lastVal + (0.028 * white)) / 1.028;
+                    output[i] = lastVal * 3.4;
+                }
+
+                const noise = ctx.createBufferSource();
+                noise.buffer = buffer;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                if (isCover) {
+                    filter.frequency.setValueAtTime(850, ctx.currentTime);
+                    filter.frequency.exponentialRampToValueAtTime(450, ctx.currentTime + duration);
+                    filter.Q.setValueAtTime(1.8, ctx.currentTime);
+                } else {
+                    filter.frequency.setValueAtTime(1900, ctx.currentTime);
+                    filter.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + duration);
+                    filter.Q.setValueAtTime(2.2, ctx.currentTime);
+                }
+
+                const gain = ctx.createGain();
+                const peakGain = isCover ? 0.18 : 0.12;
+                gain.gain.setValueAtTime(0.001, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(peakGain, ctx.currentTime + 0.035);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(ctx.destination);
+
+                noise.start();
+            } catch (err) {
+                // AudioContext silent fallback
+            }
+        };
+
+        // 3. Update Bookmark Navigation Tabs
+        const updateTabs = (targetIndex) => {
             tabButtons.forEach(btn => {
                 const tabIndex = parseInt(btn.getAttribute('data-tab-page'), 10);
                 if (tabIndex === targetIndex) {
@@ -378,29 +440,78 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.classList.remove('active');
                 }
             });
+        };
 
-            currentPage = targetIndex;
+        // 4. Physical 3D Page Turn Engine
+        const flipToPage = (targetIndex) => {
+            if (isFlipping) return;
+            if (targetIndex < 0 || targetIndex >= totalPages) return;
+            if (targetIndex === currentPage) return;
 
-            // Re-render lucide icons if needed
+            isFlipping = true;
+            const currentEl = pages[currentPage];
+            const targetEl = pages[targetIndex];
+
+            // Re-render icons on incoming page
             if (window.lucide && typeof window.lucide.createIcons === 'function') {
                 window.lucide.createIcons();
             }
 
-            // If user scrolled away on small screens, keep book neatly in view
-            if (window.innerWidth < 768) {
-                const bookRect = bookWrapper.getBoundingClientRect();
-                if (bookRect.top < 0 || bookRect.bottom > window.innerHeight) {
-                    bookWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+            // Case A: Front Cover Physical Opening (Page 0 -> Next)
+            if (currentPage === 0 && targetIndex > 0) {
+                playPaperSound(true);
+                currentEl.classList.add('cover-swing-open');
+                targetEl.classList.add('is-active', 'revealing-under');
+
+                setTimeout(() => {
+                    currentEl.classList.remove('is-active', 'cover-swing-open');
+                    targetEl.classList.remove('revealing-under');
+                    currentPage = targetIndex;
+                    updateTabs(currentPage);
+                    isFlipping = false;
+                }, 800);
+                return;
+            }
+
+            // Case B: Forward 3D Page Turn (Next page)
+            if (targetIndex > currentPage) {
+                playPaperSound(false);
+                currentEl.classList.add('turning-forward');
+                targetEl.classList.add('is-active', 'revealing-under');
+
+                setTimeout(() => {
+                    currentEl.classList.remove('is-active', 'turning-forward');
+                    targetEl.classList.remove('revealing-under');
+                    currentPage = targetIndex;
+                    updateTabs(currentPage);
+                    isFlipping = false;
+                }, 700);
+                return;
+            }
+
+            // Case C: Backward 3D Page Turn (Previous page)
+            if (targetIndex < currentPage) {
+                playPaperSound(targetIndex === 0);
+                currentEl.classList.add('receding-under');
+                targetEl.classList.add('is-active', 'turning-backward');
+
+                setTimeout(() => {
+                    currentEl.classList.remove('is-active', 'receding-under');
+                    targetEl.classList.remove('turning-backward');
+                    currentPage = targetIndex;
+                    updateTabs(currentPage);
+                    isFlipping = false;
+                }, 700);
+                return;
             }
         };
 
-        // Next Page Buttons
+        // Next Page Buttons (including Cover Open Button)
         const nextBtns = bookWrapper.querySelectorAll('.btn-book-next');
         nextBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                goToPage(currentPage + 1);
+                flipToPage(currentPage + 1);
             });
         });
 
@@ -410,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (currentPage > 0) {
-                    goToPage(currentPage - 1);
+                    flipToPage(currentPage - 1);
                 }
             });
         });
@@ -420,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
         firstBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                goToPage(0);
+                flipToPage(0);
             });
         });
 
@@ -429,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
         indexQuickBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                goToPage(2);
+                flipToPage(2);
             });
         });
 
@@ -439,7 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('click', () => {
                 const targetPage = parseInt(item.getAttribute('data-goto'), 10);
                 if (!isNaN(targetPage)) {
-                    goToPage(targetPage);
+                    flipToPage(targetPage);
                 }
             });
         });
@@ -449,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 const targetPage = parseInt(btn.getAttribute('data-tab-page'), 10);
                 if (!isNaN(targetPage)) {
-                    goToPage(targetPage);
+                    flipToPage(targetPage);
                 }
             });
         });
@@ -464,12 +575,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'ArrowRight' || e.key === 'PageDown') {
                 if (currentPage < totalPages - 1) {
                     e.preventDefault();
-                    goToPage(currentPage + 1);
+                    flipToPage(currentPage + 1);
                 }
             } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
                 if (currentPage > 0) {
                     e.preventDefault();
-                    goToPage(currentPage - 1);
+                    flipToPage(currentPage - 1);
                 }
             }
         });
@@ -495,14 +606,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const diffX = touchEndX - touchStartX;
             const diffY = touchEndY - touchStartY;
 
-            if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
                 if (diffX < 0) {
                     if (currentPage < totalPages - 1) {
-                        goToPage(currentPage + 1);
+                        flipToPage(currentPage + 1);
                     }
                 } else {
                     if (currentPage > 0) {
-                        goToPage(currentPage - 1);
+                        flipToPage(currentPage - 1);
                     }
                 }
             }
