@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=3.9">
+    <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
 
@@ -759,6 +759,42 @@
                     </div>
                 </div>
 
+                <!-- Project 3: ITLC Foundation Hub -->
+                <div class="project-card reveal-slide-left" style="animation-delay: 0.4s;" data-project="itlc-foundation">
+                    <div class="project-header">
+                        <div class="project-meta">
+                            <span class="project-type">Full-Stack Web Portal</span>
+                            <span class="project-status live">LIVE PRODUCTION</span>
+                        </div>
+                        <h3 class="project-title">ITLC Foundation Hub</h3>
+                        <p class="project-org">Organization: ITLC India Pvt. Ltd.</p>
+                    </div>
+
+                    <!-- Video Container: 100% No Crop & Clean Aspect Ratio -->
+                    <div class="project-video-wrapper">
+                        <video class="project-preview-video" 
+                               src="vid/itlc-foundation.mp4" 
+                               muted loop playsinline preload="metadata">
+                        </video>
+                        <div class="video-overlay-hint">
+                            <i data-lucide="play" class="hint-play-icon"></i>
+                            <span class="hint-text">Hover or tap to play video</span>
+                        </div>
+                    </div>
+
+                    <!-- Project Actions -->
+                    <div class="project-actions">
+                        <button type="button" class="btn btn-details-modal" data-modal="modal-itlc-foundation">
+                            <i data-lucide="info" class="btn-icon"></i>
+                            See Details About My Project
+                        </button>
+                        <a href="https://itlcfoundation.com" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
+                            <i data-lucide="external-link" class="btn-icon"></i>
+                            Visit Live Project
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Modal 1: InfraVision Project Details -->
@@ -874,6 +910,63 @@
                         <a href="https://www.bkku.org/" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
                             <i data-lucide="external-link" class="btn-icon"></i>
                             Visit Live Project (bkku.org)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal 3: ITLC Foundation Hub Project Details -->
+            <div id="modal-itlc-foundation" class="project-modal-backdrop" aria-hidden="true" role="dialog">
+                <div class="project-modal-content">
+                    <button type="button" class="modal-close-btn" aria-label="Close modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                    
+                    <div class="modal-header">
+                        <div class="project-meta">
+                            <span class="project-type">Full-Stack Web Portal</span>
+                            <span class="project-status live">LIVE PRODUCTION</span>
+                        </div>
+                        <h3 class="modal-title">ITLC Foundation Hub</h3>
+                        <p class="modal-org">Organization: ITLC India Pvt. Ltd.</p>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="modal-section">
+                            <h4>Project Overview</h4>
+                            <p class="project-description">
+                                Designed, engineered, and deployed the official full-stack web platform for ITLC Foundation, dedicated to social welfare, education empowerment, and environmental sustainability (tree plantation) initiatives across Uttar Pradesh.
+                            </p>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4>Key Outcomes & Security Architecture</h4>
+                            <ul class="outcome-list">
+                                <li>Production-deployed responsive web portal with fast loading & 99.9% uptime</li>
+                                <li>Interactive donation workflow with secure payment and validation flow</li>
+                                <li>Modular initiative showcases for Education, Environment, and Social Welfare</li>
+                                <li>Hardened server-side REST API architecture with strict request sanitization</li>
+                                <li>Cross-device accessibility compliance and SEO optimization</li>
+                                <li>Role-based administrative control and secure data handling</li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-section">
+                            <h4>Technologies & Tools Used</h4>
+                            <div class="project-tech">
+                                <span class="tech-pill">React.js</span>
+                                <span class="tech-pill">PHP</span>
+                                <span class="tech-pill">MySQL</span>
+                                <span class="tech-pill">REST APIs</span>
+                                <span class="tech-pill">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="https://itlcfoundation.com" target="_blank" rel="noopener noreferrer" class="btn btn-live-project">
+                            <i data-lucide="external-link" class="btn-icon"></i>
+                            Visit Live Project (itlcfoundation.com)
                         </a>
                     </div>
                 </div>
@@ -1389,6 +1482,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=3.9"></script>
+    <script src="script.js?v=4.0"></script>
 </body>
 </html>
