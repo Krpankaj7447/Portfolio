@@ -1662,7 +1662,7 @@ img {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
@@ -1670,7 +1670,7 @@ img {
     background-color: var(--bg-navy-light);
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 16px;
-    padding: 2.5rem;
+    padding: 2rem 1.6rem 2.2rem 1.6rem;
     box-shadow: var(--shadow-premium);
     transition: var(--transition-smooth);
     display: flex;
@@ -1795,10 +1795,17 @@ img {
     background-color: #050b14;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.25);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     margin: 1.2rem 0 1.5rem 0;
     cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-video-wrapper:hover {
+    border-color: rgba(212, 175, 55, 0.65);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.35);
+    transform: translateY(-2px);
 }
 
 .project-preview-video {
@@ -1807,7 +1814,45 @@ img {
     object-fit: contain; /* Guarantees 0% crop on all sides */
     display: block;
     background-color: #040812;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
+}
+
+.project-video-wrapper:hover .project-preview-video {
+    transform: scale(1.025);
+}
+
+.video-expand-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    pointer-events: none;
+}
+
+.video-expand-badge svg,
+.video-expand-badge i {
+    width: 16px;
+    height: 16px;
+}
+
+.project-video-wrapper:hover .video-expand-badge {
+    transform: scale(1.12);
+    background: rgba(212, 175, 55, 0.3);
+    border-color: var(--accent-gold);
+    color: #FFFFFF;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
 }
 
 .video-overlay-hint {
@@ -2019,6 +2064,180 @@ img {
 .modal-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 1.5rem;
+}
+
+/* --------------------------------------------------
+   GLOBAL PROJECT VIDEO THEATER / LIGHTBOX MODAL
+-------------------------------------------------- */
+.video-lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 9, 18, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-lightbox-backdrop.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-lightbox-container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    background: linear-gradient(180deg, #0A1628 0%, #060D18 100%);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 18px;
+    box-shadow: 0 30px 75px rgba(0, 0, 0, 0.95), 0 0 45px rgba(212, 175, 55, 0.22);
+    overflow: hidden;
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.video-lightbox-backdrop.is-active .video-lightbox-container {
+    transform: scale(1) translateY(0);
+}
+
+.video-lightbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.6rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+    background: rgba(5, 11, 20, 0.7);
+}
+
+.video-lightbox-title-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-lightbox-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+.video-lightbox-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-cream);
+    margin: 0;
+}
+
+.video-lightbox-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: var(--text-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.video-lightbox-close:hover {
+    background: var(--accent-gold);
+    color: var(--bg-dark);
+    border-color: var(--accent-gold);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
+}
+
+.video-lightbox-close svg,
+.video-lightbox-close i {
+    width: 20px;
+    height: 20px;
+}
+
+.video-lightbox-player-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 70vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-lightbox-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    outline: none;
+    background: #000;
+}
+
+.video-lightbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.6rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.18);
+    background: rgba(5, 11, 20, 0.7);
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.video-lightbox-hint-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.video-lightbox-hint-note svg,
+.video-lightbox-hint-note i {
+    width: 14px;
+    height: 14px;
+    color: var(--accent-gold);
+}
+
+.lightbox-live-btn {
+    width: auto;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.86rem;
+}
+
+@media (max-width: 600px) {
+    .video-lightbox-backdrop {
+        padding: 0.75rem;
+    }
+    .video-lightbox-header {
+        padding: 0.85rem 1rem;
+    }
+    .video-lightbox-title {
+        font-size: 1.05rem;
+    }
+    .video-lightbox-footer {
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .lightbox-live-btn {
+        width: 100%;
+    }
 }
 
 

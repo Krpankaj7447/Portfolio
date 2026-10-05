@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------
-       FEATURED PROJECT VIDEO HOVER & MODAL CONTROLLER
+       FEATURED PROJECT VIDEO PREVIEW & THEATER CONTROLLER
     -------------------------------------------------- */
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
@@ -246,22 +246,94 @@ document.addEventListener('DOMContentLoaded', () => {
             if (hint) hint.classList.remove('is-playing');
         };
 
-        // Hover events for Desktop
+        // Hover events for Desktop preview
         card.addEventListener('mouseenter', playVideo);
         card.addEventListener('mouseleave', pauseVideo);
+    });
 
-        // Tap/Click event for Mobile/Touch
-        const videoWrapper = card.querySelector('.project-video-wrapper');
+    /* --------------------------------------------------
+       GLOBAL PROJECT VIDEO THEATER / LIGHTBOX CONTROLLER
+       (Delegated on document so all current and future projects work automatically)
+    -------------------------------------------------- */
+    const videoLightbox = document.getElementById('video-lightbox-modal');
+    const lightboxVideo = document.getElementById('lightbox-video-player');
+    const lightboxTitle = document.getElementById('lightbox-project-title');
+    const lightboxLiveLink = document.getElementById('lightbox-live-link');
+    const lightboxCloseBtn = videoLightbox ? videoLightbox.querySelector('.video-lightbox-close') : null;
+
+    const openVideoLightbox = (card) => {
+        if (!videoLightbox || !lightboxVideo || !card) return;
+        const previewVideo = card.querySelector('.project-preview-video');
+        const titleEl = card.querySelector('.project-title');
+        const liveLinkEl = card.querySelector('.btn-live-project');
+
+        if (!previewVideo) return;
+        const videoSrc = previewVideo.currentSrc || previewVideo.src || previewVideo.getAttribute('src');
+        if (!videoSrc) return;
+
+        // Pause all card previews
+        document.querySelectorAll('.project-preview-video').forEach(v => v.pause());
+        document.querySelectorAll('.video-overlay-hint').forEach(h => h.classList.remove('is-playing'));
+
+        // Populate lightbox details
+        lightboxVideo.src = videoSrc;
+        if (lightboxTitle && titleEl) {
+            lightboxTitle.textContent = titleEl.textContent.trim();
+        }
+        if (lightboxLiveLink && liveLinkEl) {
+            lightboxLiveLink.href = liveLinkEl.href;
+        }
+
+        // Display lightbox modal
+        videoLightbox.classList.add('is-active');
+        videoLightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // Play the expanded video
+        lightboxVideo.currentTime = 0;
+        const playPromise = lightboxVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+        }
+    };
+
+    const closeVideoLightbox = () => {
+        if (!videoLightbox || !lightboxVideo) return;
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute('src');
+        lightboxVideo.load();
+        videoLightbox.classList.remove('is-active');
+        videoLightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    // Global Click Delegation for any current or future project video wrapper
+    document.addEventListener('click', (e) => {
+        const videoWrapper = e.target.closest('.project-video-wrapper');
         if (videoWrapper) {
-            videoWrapper.addEventListener('click', () => {
-                if (video.paused) {
-                    playVideo();
-                } else {
-                    pauseVideo();
-                }
-            });
+            e.preventDefault();
+            e.stopPropagation();
+            const card = videoWrapper.closest('.project-card');
+            if (card) {
+                openVideoLightbox(card);
+            }
         }
     });
+
+    if (lightboxCloseBtn) {
+        lightboxCloseBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeVideoLightbox();
+        });
+    }
+
+    if (videoLightbox) {
+        videoLightbox.addEventListener('click', (e) => {
+            if (e.target === videoLightbox) {
+                closeVideoLightbox();
+            }
+        });
+    }
 
     // Project Detail Modal Controller
     const modalOpenButtons = document.querySelectorAll('.btn-details-modal');
@@ -281,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Pause any running videos when modal is opened
                 document.querySelectorAll('.project-preview-video').forEach(v => v.pause());
                 document.querySelectorAll('.video-overlay-hint').forEach(h => h.classList.remove('is-playing'));
+                if (lightboxVideo) lightboxVideo.pause();
             }
         });
     });
@@ -310,6 +383,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
+            if (videoLightbox && videoLightbox.classList.contains('is-active')) {
+                closeVideoLightbox();
+            }
             const activeModal = document.querySelector('.project-modal-backdrop.is-active');
             if (activeModal) closeModal(activeModal);
         }

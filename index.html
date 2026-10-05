@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <link rel="stylesheet" href="style.css?v=4.1">
 </head>
 <body>
 
@@ -706,8 +706,11 @@
                         </video>
                         <div class="video-overlay-hint">
                             <i data-lucide="play" class="hint-play-icon"></i>
-                            <span class="hint-text">Hover or tap to play video</span>
+                            <span class="hint-text">Click to Enlarge • Hover to Preview</span>
                         </div>
+                        <span class="video-expand-badge" title="Watch in Theater Mode">
+                            <i data-lucide="maximize-2"></i>
+                        </span>
                     </div>
 
                     <!-- Project Actions -->
@@ -742,8 +745,11 @@
                         </video>
                         <div class="video-overlay-hint">
                             <i data-lucide="play" class="hint-play-icon"></i>
-                            <span class="hint-text">Hover or tap to play video</span>
+                            <span class="hint-text">Click to Enlarge • Hover to Preview</span>
                         </div>
+                        <span class="video-expand-badge" title="Watch in Theater Mode">
+                            <i data-lucide="maximize-2"></i>
+                        </span>
                     </div>
 
                     <!-- Project Actions -->
@@ -778,8 +784,11 @@
                         </video>
                         <div class="video-overlay-hint">
                             <i data-lucide="play" class="hint-play-icon"></i>
-                            <span class="hint-text">Hover or tap to play video</span>
+                            <span class="hint-text">Click to Enlarge • Hover to Preview</span>
                         </div>
+                        <span class="video-expand-badge" title="Watch in Theater Mode">
+                            <i data-lucide="maximize-2"></i>
+                        </span>
                     </div>
 
                     <!-- Project Actions -->
@@ -969,6 +978,33 @@
                             Visit Live Project (itlcfoundation.com)
                         </a>
                     </div>
+            </div>
+        </div>
+
+        <!-- Global Project Video Lightbox / Theater Mode Modal -->
+        <div id="video-lightbox-modal" class="video-lightbox-backdrop" aria-hidden="true" role="dialog">
+            <div class="video-lightbox-container">
+                <div class="video-lightbox-header">
+                    <div class="video-lightbox-title-group">
+                        <span class="video-lightbox-tag">PROJECT DEMO PREVIEW</span>
+                        <h3 class="video-lightbox-title" id="lightbox-project-title">Project Video Preview</h3>
+                    </div>
+                    <button type="button" class="video-lightbox-close" aria-label="Close video player">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="video-lightbox-player-wrapper">
+                    <video id="lightbox-video-player" class="video-lightbox-video" controls playsinline preload="auto">
+                    </video>
+                </div>
+                <div class="video-lightbox-footer">
+                    <span class="video-lightbox-hint-note">
+                        <i data-lucide="info"></i> Press ESC or click outside to close
+                    </span>
+                    <a id="lightbox-live-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-live-project lightbox-live-btn">
+                        <i data-lucide="external-link" class="btn-icon"></i>
+                        Visit Live Project
+                    </a>
                 </div>
             </div>
         </div>
@@ -1482,6 +1518,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=4.0"></script>
+    <script src="script.js?v=4.1"></script>
 </body>
 </html>
